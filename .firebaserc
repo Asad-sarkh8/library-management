@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "library-management-2209e": {
+      "hosting": {
+        "to-do": [
+          "library-management-2209e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "library-management-2209e"
+  }
+}

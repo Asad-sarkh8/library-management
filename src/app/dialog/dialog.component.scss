@@ -1,0 +1,41 @@
+
+mat-form-field {
+    width: 100%;
+}
+
+.dialogTitle{
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #778D45;
+    
+    
+}
+
+.outline{
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.radioGroup{
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.radioButton{
+    margin: 5px;
+}
+
+.addButton{
+    background-color: #344C11;
+    color: white;
+    letter-spacing: 2px;
+    margin-right: 8px;
+    
+}
+
+.closeButton{
+    letter-spacing: 2px;
+    margin-right: 10px;
+    background-color: rgb(216, 216, 216);
+}

@@ -1,31 +1,13 @@
-<mat-toolbar class="bar" color="warn">
-  <mat-icon
-    class="example-icon"
-    aria-hidden="false"
-    aria-label="Example heart icon"
-    >home</mat-icon
-  >
-  <span>Library Management</span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button class="button" *ngIf="checker" (click)="click()">
-    Borrowers
-  </button>
-  <button mat-raised-button class="button" *ngIf="!checker" (click)="click()">
-    Books
-  </button>
-</mat-toolbar>
-
-<div class="container" *ngIf="checker">
+<div class="container">
   <div style="margin-top: 10px">
     <button mat-raised-button class="addbutton" (click)="openDialog()">
-      Add Book
+      Add Borrower
     </button>
     <mat-form-field color="accent">
       <input matInput placeholder="Filter" (keyup)="applyFilter($event)" />
     </mat-form-field>
-    <div class="mat-elevation-z8" *ngIf="checker">
+    <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
-        <!-- ISBN -->
         <ng-container matColumnDef="ISBN">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ISBN</th>
           <td
@@ -33,40 +15,46 @@
             *matCellDef="let row"
             style="color: #718837; font-weight: bold; letter-spacing: 1px"
           >
-            {{ row.isbn || "N/A" }}
+            {{ row.isbn }}
           </td>
         </ng-container>
-
-        <!-- title -->
-        <ng-container matColumnDef="Title">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <!-- first name -->
+        <ng-container matColumnDef="First Name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
           <td mat-cell *matCellDef="let row">
-            {{ row.title || "N/A" }}
+            {{ row.firstName || "N/A" }}
           </td>
         </ng-container>
 
-        <!-- Author -->
-        <ng-container matColumnDef="Author">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Author</th>
-          <td mat-cell *matCellDef="let row">{{ row.authors || "N/A" }}</td>
-        </ng-container>
-
-        <!-- publisher Column -->
-        <ng-container matColumnDef="Publisher">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Publisher</th>
+        <!-- Last Name -->
+        <ng-container matColumnDef="Last Name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
           <td mat-cell *matCellDef="let row">
-            {{ row.publisher || "N/A" }}
+            {{ row.lastName || "N/A" }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="Publication Date">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Publication Date
-          </th>
+        <!-- Email -->
+        <ng-container matColumnDef="Email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+          <td mat-cell *matCellDef="let row">{{ row.email || "N/A" }}</td>
+        </ng-container>
+
+        <!-- Contact no. -->
+        <ng-container matColumnDef="Contact no.">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact no.</th>
           <td mat-cell *matCellDef="let row">
-            {{ row.publicationDate.toDate().toLocaleDateString() }}
+            {{ row.contact || "N/A" }}
           </td>
         </ng-container>
+
+        <ng-container matColumnDef="Address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.address || "N/A" }}
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
           <td mat-cell *matCellDef="let row" style="display: flex">
@@ -87,5 +75,3 @@
     </div>
   </div>
 </div>
-
-<app-user-page *ngIf="!checker"></app-user-page>

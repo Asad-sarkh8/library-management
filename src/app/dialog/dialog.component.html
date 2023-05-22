@@ -1,0 +1,86 @@
+<h1 mat-dialog-title class="dialogTitle">Add a Book</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="books">
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">ISBN</mat-label>
+      <input
+        formControlName="isbn"
+        matInput
+        type="number"
+        maxlength="10"
+        class="outline"
+        placeholder="ISBN"
+      />
+    </mat-form-field>
+
+    <!-- title -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Title</mat-label>
+      <input
+        formControlName="title"
+        matInput
+        maxlength="50"
+        class="outline"
+        placeholder="Title"
+      />
+    </mat-form-field>
+
+    <!-- Authors -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Authors</mat-label>
+      <input
+        formControlName="authors"
+        matInput
+        class="outline"
+        placeholder="Author"
+      />
+    </mat-form-field>
+
+    <!-- Publisher -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Publisher</mat-label>
+      <input
+        formControlName="publisher"
+        matInput
+        maxlength="50"
+        class="outline"
+        placeholder="Publisher"
+      />
+    </mat-form-field>
+
+    <!-- publication date -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Publication Date</mat-label>
+      <input
+        formControlName="publicationDate"
+        matInput
+        [matDatepicker]="myDatepicker"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="myDatepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- <label> <h1 class="dialogTitle">Set Reminder</h1></label>
+    <mat-radio-group formControlName="options" class="radioGroup">
+      <mat-radio-button
+        class="radioButton"
+        *ngFor="let item of List"
+        [value]="item"
+        >{{ item }}</mat-radio-button
+      >
+    </mat-radio-group> -->
+
+    <div mat-dialog-action [align]="'end'">
+      <button mat-raised-button mat-dialog-close class="closeButton">
+        Cancel
+      </button>
+      <button mat-raised-button class="addButton" (click)="addTask()">
+        Add
+      </button>
+    </div>
+  </form>
+</div>

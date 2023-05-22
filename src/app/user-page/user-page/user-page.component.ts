@@ -1,50 +1,46 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
-import { ApiService } from './services/api.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserDialogComponent } from './user-page/user-dialog/user-dialog.component';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { ApiService } from 'src/app/services/api.service';
+import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-user-page',
+  templateUrl: './user-page.component.html',
+  styleUrls: ['./user-page.component.scss'],
 })
-export class AppComponent implements OnInit {
-  title = 'to-do';
-
+export class UserPageComponent implements OnInit {
   displayedColumns: string[] = [
     'ISBN',
-    'Title',
-    'Author',
-    'Publisher',
-    'Publication Date',
+    'First Name',
+    'Last Name',
+    'Email',
+    'Contact no.',
+    'Address',
     'Action',
   ];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  bookList: any;
-  checker: boolean = true;
-  click() {
-    this.checker = !this.checker;
-  }
+  borrowersList: any;
+
   constructor(
     private dialog: MatDialog,
     private api: ApiService,
     private snackBar: MatSnackBar
   ) {}
+
   ngOnInit(): void {
     this.getData();
   }
-
   openDialog(): void {
     this.dialog
-      .open(DialogComponent, {
+      .open(UserDialogComponent, {
         width: '50%',
       })
       .afterClosed()
@@ -55,20 +51,16 @@ export class AppComponent implements OnInit {
       });
   }
 
-  add(book: any) {
-    this.api.create('books', book);
-  }
-
   getData() {
-    this.api.get('books').subscribe({
+    this.api.get('borrowers').subscribe({
       next: (res) => {
-        this.bookList = res.map((e: any) => {
+        this.borrowersList = res.map((e: any) => {
           const data = e.payload.doc.data();
 
           data.id = e.payload.doc.id;
           return data;
         });
-        this.dataSource = new MatTableDataSource(this.bookList);
+        this.dataSource = new MatTableDataSource(this.borrowersList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
@@ -91,7 +83,7 @@ export class AppComponent implements OnInit {
 
   editData(row: any) {
     this.dialog
-      .open(DialogComponent, {
+      .open(UserDialogComponent, {
         width: '50%',
         data: row,
       })
@@ -104,8 +96,10 @@ export class AppComponent implements OnInit {
   }
 
   deleteBook(row: any) {
-    if (window.confirm('Delete "' + row.title + '"?')) {
-      this.api.delete('books', row.id).then(() => {
+    if (
+      window.confirm('Delete "' + row.firstName + ' ' + row.lastName + '"?')
+    ) {
+      this.api.delete('borrowers', row.id).then(() => {
         this.getData();
       });
     }

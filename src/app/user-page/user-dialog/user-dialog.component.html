@@ -1,0 +1,85 @@
+<h1 mat-dialog-title class="dialogTitle">Add a Borrower</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="borrowers">
+    <!-- First Name -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">First Name</mat-label>
+      <input
+        formControlName="firstName"
+        matInput
+        maxlength="50"
+        class="outline"
+        placeholder="First Name"
+      />
+    </mat-form-field>
+
+    <!-- last Name -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Last Name</mat-label>
+      <input
+        formControlName="lastName"
+        matInput
+        class="outline"
+        placeholder="Last Name"
+      />
+    </mat-form-field>
+
+    <!-- email -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Email</mat-label>
+      <input
+        formControlName="email"
+        matInput
+        type="email"
+        maxlength="50"
+        class="outline"
+        placeholder="Email"
+      />
+    </mat-form-field>
+
+    <!-- contact -->
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Contact</mat-label>
+      <input
+        formControlName="contact"
+        matInput
+        type="tel"
+        maxlength="50"
+        class="outline"
+        placeholder="Contact"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">Address</mat-label>
+      <input
+        formControlName="address"
+        matInput
+        maxlength="150"
+        class="outline"
+        placeholder="Address"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label class="outline">ISBN</mat-label>
+      <input
+        formControlName="isbn"
+        matInput
+        type="number"
+        maxlength="10"
+        class="outline"
+        placeholder="ISBN"
+      />
+    </mat-form-field>
+
+    <div mat-dialog-action [align]="'end'">
+      <button mat-raised-button mat-dialog-close class="closeButton">
+        Cancel
+      </button>
+      <button mat-raised-button class="addButton" (click)="addTask()">
+        Add
+      </button>
+    </div>
+  </form>
+</div>
